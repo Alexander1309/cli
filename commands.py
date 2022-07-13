@@ -40,3 +40,30 @@ def command_nodeJs(path):
         'list'
     ]
     return commands
+
+def command_vite(path):
+    comands = [
+        'cd',
+        path,
+        '.',
+        '&&',
+        'npm',
+        'create',
+        'vite@latest',
+        '.',
+        '--',
+        '--template',
+        'react',
+        '-y',
+        '&&',
+        'cls',
+        '&&',
+        'npm',
+        'i',
+        '&&',
+        'cls',
+        '&&',
+        'npm',
+        'list'
+    ]
+    return comands

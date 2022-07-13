@@ -1,8 +1,9 @@
+from math import dist
 from subprocess import run
 import argparse
 import os
-from commands import command_nodeJs
-from examples import example_node_js
+from commands import command_nodeJs, command_vite
+from examples import example_node_js, example_node_js_env, example_node_js_pack
 
 path_folder = os.path.expanduser(os.path.abspath('C:\\Users\\alexa\\workspace'))
 count_create_folder = 0
@@ -18,17 +19,18 @@ def html(name):
 def react(name):
     print('React')
 
-def vite(name):
-   print('Vite')
+def vite(name, path):
+    run(command_vite(path), shell=True)
+   
 
 def node(name, path):
     create_folder(os.path.join(name, 'src'))
     write_files(os.path.join(path, 'src', 'index.js'), example_node_js)
+    write_files(os.path.join(path, '.env'), example_node_js_env)
     create_folder(os.path.join(name, 'src', 'libs'))
     create_folder(os.path.join(name, 'src', 'models'))
     create_folder(os.path.join(name, 'src', 'routers'))
     run(command_nodeJs(path), shell=True)
-    
 
 langs = {
     'html': html,
@@ -36,6 +38,11 @@ langs = {
     'vite': vite,
     'node': node,
 }
+
+
+def read_files(path):
+    with open(path, 'r') as file:
+        return file.read()
 
 def write_files(path, data):
     with open(path, 'w') as file:
